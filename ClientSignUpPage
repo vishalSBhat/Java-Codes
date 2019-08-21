@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New client creation</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript">
+	function validate1()
+	{
+		var regx=/\d{10}/;
+	 	var new_name=document.getElementById("new_name");
+	 	var ph_no1=document.getElementById("ph_no1");
+	 	if((ph_no1.value=="") && (new_name.value==""))
+	 		{
+	 		document.getElementById("validation1").style.visibility="visible";
+	 		document.getElementById("validation2").style.visibility="visible";
+	 		return false;
+	 		}
+	 	else if(ph_no1.value=="")
+	 	{
+	 		document.getElementById("validation1").style.visibility="visible";
+	 		document.getElementById("validation2").style.visibility="hidden";
+	 		return false;
+	 	}
+	 	else if(new_name.value=="")
+	 		{
+	 		document.getElementById("validation2").style.visibility="visible";
+	 		document.getElementById("validation1").style.visibility="hidden";
+	 		return false;
+	 		}
+	 	else if(regx.test(ph_no1.value))
+	 		return true;
+	 	else
+	 		{
+	 		alert("Enter a valid 10-digit phone number");
+	 		return false;
+	 		}
+	}
+    </script>
+</head>
+<body>
+	<header>Enter Client Details</header>
+	<div class="box1">
+	<form onsubmit="return validate1();" action="">
+		<label>CLIENT NAME :- </label>
+		<input id="new_name" type="text" placeholder="Enter client name">
+		<label id="validation2">Fill this space</label>
+	<br>
+	<br>
+		<label>CLIENT Ph.No. :- </label>
+		<input id="ph_no1" type="text" placeholder="Enter client Ph.No.">
+		<label id="validation1">Fill this space</label>
+	<br>
+	<br>
+		<label class="textarea">CLIENT ADDRESS :- </label>
+		<textarea name="message" placeholder="Enter client address"></textarea>
+	<br>
+	<br>
+		<button type="submit">SUBMIT</button>
+	</form>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+body{
+	background-image:url('images/background.jpg');
+	background-size:cover;
+}
+.heading{
+	font-family: Cooper Black;
+	font-size:40px;
+	color:black;
+	border:0;
+	padding-top:1px;
+	padding-bottom:10px;
+	text-align:center;
+	letter-spacing:0.05em;
+	word-spacing:0.5em;
+	margin:50px;
+}
+.box{
+	text-align:center;
+	margin:0 500px;
+	padding-top:30px;
+	padding-bottom:30px;
+	border:4px inset;
+	
+}
+.box label{
+	font-family:Helvetica;
+	font-size:20px;
+	font-weight:bold;
+}
+.box button{
+	font-family:Arial;
+	font-weight:bold;
+	color:black;
+	font-size:15px;
+	background-color:#f0f0f0;
+	padding:5px;
+	border:0.5px solid black;
+	border-radius:30px;
+	outline:none;
+}
+.box button:hover{
+	border:3px solid black;
+	border-radius:30px;
+}
+.box input{
+	padding:12px 20px;
+	border:2px black solid;
+	border-radius:30px;
+	outline:none;
+}
+a{
+	font:15px Arial;
+	color:black;
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:underline;
+	font-weight:bold;
+}
+header{
+	font:40px black Arial;
+	font-weight:bold;
+	margin:30px;
+	padding:20px;
+}
+.box1{
+	margin:30px 60px;
+	padding:5px 60px;
+}
+.box1 label{
+	font:25px black Helvetica;
+	font-weight:bold;
+}
+.box1 input{
+	background-color:white;
+	font:18px black Arial Black;
+	margin:10px;
+	padding:12px 20px;
+	border:2px black solid;
+	border-radius:5px;
+	outline:none;
+}
+.box1 textarea{
+	background-color:white;
+	font:18px black Arial Black;
+	margin-top:20px;
+	height:80px;
+	width:100%;
+	resize:none;
+	padding:12px 20px;
+	border:2px black solid;
+	border-radius:5px;
+	outline:none;
+	box-sizing:border-box;
+}
+.box1 button{
+	font-family:Arial;
+	font-weight:bold;
+	color:black;
+	font-size:20px;
+	background-color:#f0f0f0;
+	margin:0 500px;
+	padding:10px;
+	border:0.5px solid black;
+	border-radius:30px;
+	outline:none;
+}
+.box1 button:hover{
+	border:3px solid black;
+	border-radius:30px;
+}
+#validation{
+	color:red;
+	font-size:10px;
+	margin:0px;
+	padding-top:8px;
+	visibility:hidden;
+}
+#validation1{
+	color:red;
+	font-size:18px;
+	margin:0px;
+	padding-top:0px;
+	visibility:hidden;
+	font-weight:300;
+	font-style:italic;
+}
+#validation2{
+	color:red;
+	font-size:18px;
+	margin:0px;
+	padding-top:0px;
+	visibility:hidden;
+	font-weight:300;
+	font-style:italic;
+}
