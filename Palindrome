@@ -1,0 +1,25 @@
+public class Solution {
+    public int isPalindrome(int A) {
+        if(A<0)
+        return 0;
+        String s=String.valueOf(A);
+        int n=s.length(),i,j=n-1,f=0;
+            for(i=0;i<n/2;i++)
+            {
+                if(s.charAt(i)==s.charAt(j))
+                {
+                    j--;
+                    continue;
+                }
+                else
+                {
+                    f++;
+                    break;
+                }
+            }
+        if(f==0)
+        return 1;
+        else
+        return 0;
+    }
+}
