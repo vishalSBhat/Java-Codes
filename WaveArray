@@ -1,0 +1,14 @@
+public class Solution {
+    public ArrayList<Integer> wave(ArrayList<Integer> A) {
+        int i,j,x,t;
+        x=A.size();
+        Collections.sort(A);
+        for(i=0;i+1<x;i+=2)
+        {
+            t=A.get(i);
+            A.set(i,A.get(i+1));
+            A.set(i+1,t);
+        }
+        return A;
+    }
+}
