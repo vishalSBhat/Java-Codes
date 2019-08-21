@@ -1,0 +1,22 @@
+public class Solution {
+    public int gcd(int A, int B) {
+        int ma,mi,r;
+        ma=(A>B)?A:B;
+        mi=(A<B)?A:B;
+        try
+        {
+            r=ma%mi;
+        }
+        catch(Exception e)
+        {
+            return ma;
+        }
+        while(r!=0)
+        {
+            ma=mi;
+            mi=r;
+            r=ma%mi;
+        }
+        return mi;
+    }
+}
