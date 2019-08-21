@@ -1,0 +1,29 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> solve(int A) {
+        ArrayList<ArrayList<Integer>> a=new ArrayList<ArrayList<Integer>>(A);
+        int t1[][]=new int[A][A];
+        int j,i;
+        for(i=0;i<A;i++)
+        {
+            t1[i][0]=1;
+            t1[i][i]=1;
+            if(i>=2)
+            {
+                for(j=1;j<i;j++)
+                {
+                    t1[i][j]=t1[i-1][j]+t1[i-1][j-1];
+                }
+            }
+        }
+        for(i=0;i<A;i++)
+        {
+            ArrayList<Integer> t2=new ArrayList<>();
+            for(j=0;j<=i;j++)
+            {
+                t2.add(j,t1[i][j]);
+            }
+            a.add(i,t2);
+        }
+        return a;
+    }
+}
