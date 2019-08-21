@@ -1,0 +1,45 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int hammingDistance(final List<Integer> A) {
+        int s=0,c1,c2,c,i,k;
+        String t1="",t2="";
+        for(i=0;i<A.size()-1;i++)
+        {
+            t1="";
+            int a=A.get(i);c1=0;
+            while(a>0 || c1+1==3)
+                {
+                    
+                    t1+=a%2;
+                    a/=2;
+                    c1++;
+                }
+            for(k=i+1;k<A.size();k++)
+            {
+                t2="";
+                int b=A.get(k);
+                c2=0;
+                while(b>0 || c2+1==3)
+                {
+                    t2+=b%2;
+                    b/=2;
+                    c2++;
+                }
+                if(c2>c1)
+                for(int j=1;j<=c2-c1;j++)
+                t1+="0";
+                else if(c1>c2)
+                for(int j=1;j<=c1-c2;j++)
+                t2+="0";
+                int sum=0;
+                for(int j=0;j<((c2>=c1)?c2:c1);j++)
+                {
+                    if(t1.charAt(j)!=t2.charAt(j))
+                    sum++;
+                }
+                s+=(2*sum);
+            }
+        }
+        return s;
+    }
+}
