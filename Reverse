@@ -1,0 +1,17 @@
+public class Solution {
+    public int reverse(long A) {
+        StringBuilder s = new StringBuilder(String.valueOf(Math.abs(A)));
+    s.reverse();
+    if(A<0){
+        s.insert(0,"-");
+    }
+    
+    
+    try{
+         return Integer.parseInt(String.valueOf(s));
+    }catch(Exception e){
+        return 0;
+    }
+    
+}
+    }
