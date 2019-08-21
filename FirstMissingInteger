@@ -1,0 +1,14 @@
+public class Solution {
+    public int firstMissingPositive(ArrayList<Integer> A) {
+        Set <Integer> a=new HashSet<>(A);
+        int i;
+        for(i=1;i<=a.size();i++)
+        {
+            if(a.contains(i))
+            continue;
+            else
+            return i;
+        }
+        return i;
+    }
+}
