@@ -1,0 +1,279 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.*;
+public class ClientObject
+{
+	long O_Ph_No;
+	int T_Exp,T_Amt_Paid,balance;
+	String O_Name,O_Address,O_date,O_purpose;
+	List <Integer> L_T_Exp=new ArrayList<>();
+	List <Integer> L_T_Amt_Paid=new ArrayList<>();
+	List <String> Date=new ArrayList<>();
+	List <String> Purpose=new ArrayList<>();
+	public ClientObject(long Ph_No,String Name,String Address)
+	{
+		O_Ph_No=Ph_No;
+		O_Name=Name;
+		O_Address=Address;
+	}
+	public void getClientDetails()
+	{
+		balance=T_Exp-T_Amt_Paid;
+		System.out.println("CLIENT NAME : "+O_Name);
+		System.out.println("PHONE NUMBER : "+O_Ph_No);
+		System.out.println("CLIENT ADDRESS : "+O_Address+".");
+		System.out.println("\n");
+		System.out.println("\n");
+		System.out.println("TOTAL EXPENSE = Rs."+T_Exp);
+		System.out.println("TOTAL AMOUNT PAID = Rs."+T_Amt_Paid);
+		System.out.println("BALANCE = Rs."+balance);
+	}
+	public void expenseUpdate(String date,int amount,String purpose)
+	{
+		Date.add(date);
+		L_T_Exp.add(amount);
+		Purpose.add(purpose);
+		T_Exp+=amount;
+		System.out.println("TOTAL EXPENSE UPDATED");
+	}
+	public void amountPaidUpdate(int amount)
+	{
+		L_T_Amt_Paid.add(amount);
+		T_Amt_Paid+=amount;
+		System.out.println("TOTAL AMOUNT PAID UPDATED");
+	}
+	public void getBalance()
+	{
+		balance=T_Exp-T_Amt_Paid;
+		System.out.println("BALANCE AMOUNT IS Rs."+balance);
+	}
+	public void expenseDetails()
+	{
+		int i,j;
+		System.out.println("|Sl.No.|  DATE  |  AMOUNT  |               PURPOSE               |");
+		if(L_T_Exp.size()==0)
+			System.out.println("   -        -        -                        -");
+		for(i=0;i<L_T_Exp.size();i++)
+		{
+			j=i+1;
+		    System.out.println("|  "+j+".  |"+Date.get(i)+"|Rs."+L_T_Exp.get(i)+"|"+Purpose.get(i));
+		}
+	}
+	public void amountPaidDetails()
+	{
+		int i,j;
+		for(i=0;i<L_T_Amt_Paid.size();i++)
+		{
+			j=i+1;
+		    System.out.println(j+". Rs."+L_T_Amt_Paid.get(i));
+		}
+	}
+	public void editPhoneNumber(long Ph_No)
+	{
+		System.out.println("Phone number changed from "+O_Ph_No+" to "+Ph_No);
+		O_Ph_No=Ph_No;
+	}
+	public void editAddress(String Address)
+	{
+		O_Address=Address;
+		System.out.println("New address updated");
+	}
+	public void editName(String Name)
+	{
+		O_Name=Name;
+		System.out.println("Name updated");
+	}
+}
+public class Main
+{
+	public static void main(String args[])
+	{
+		int ch,ch1,ch2,amount,n=0,exit1=0,i=0,value=0,j=1,ch3;
+		String M_Name,M_Address,err,M_date,M_purpose;
+		long M_Ph_No=0,temp;
+		ClientObject obj[]=new ClientObject[300];
+		Map <Long,Integer> clientData=new HashMap<>();
+		Scanner in=new Scanner(System.in);
+	    do
+		{
+			System.out.println("\n1.CREATE NEW CLIENT");
+			System.out.println("2.CLIENT DATA");
+			System.out.println("3.EXIT");
+			System.out.println("\n");
+			System.out.println("\n");
+			ch=in.nextInt();
+			switch(ch)
+			{
+				case 1:
+				err=in.nextLine();
+		        System.out.print("Enter Client Name : ");
+				M_Name=in.nextLine();
+				i=0;
+				while(i!=10)
+				{
+		        System.out.print("\nEnter Client Phone Number : ");
+		        M_Ph_No=in.nextLong();
+				temp=M_Ph_No;
+				for(i=1;temp/10!=0;i++)
+					temp/=10;
+				if(i!=10)
+					System.out.println("\nEnter valid 10 digit phone number\n");
+				}
+				err=in.nextLine();
+				System.out.print("\nEnter Client Address : ");
+				M_Address=in.nextLine();
+				System.out.println("\n");
+		        clientData.put(M_Ph_No,n);
+		        obj[n]=new ClientObject(M_Ph_No,M_Name,M_Address);
+		        n++;
+				break;
+				case 2:
+				j=1;
+				while(j==1)
+				{
+				System.out.print("Enter Client PHONE NUMBER : ");
+		        M_Ph_No=in.nextLong();
+				try
+				{
+				value=clientData.get(M_Ph_No);
+				j=0;
+				}
+				catch(Exception e)
+				{
+					System.out.println("\nNo match!!");
+					System.out.println("\n1.Try another Phone Number??\n2.GO BACK\n");
+					j=in.nextInt();	
+					if(j==2)
+					break;
+				}
+				}
+				if(j==2)
+					continue;
+				System.out.println("\n");
+				do
+				{
+		        obj[value].getClientDetails();
+				System.out.println("\n");
+				System.out.println("\n");
+				System.out.println("What would you like to choose??");
+				System.out.println("\n");
+		        System.out.println("1.TOTAL EXPENSE");
+				System.out.println("2.TOTAL AMOUNT PAID");
+				System.out.println("3.BALANCE CHECK");
+				System.out.println("4.EDIT CLIENT DETAILS");
+				System.out.println("5.GO BACK");
+				System.out.println("\n");
+		        ch1=in.nextInt();
+				switch(ch1)
+		        {
+			    case 1:
+				obj[value].expenseDetails();
+				System.out.println("\n");
+				System.out.println("Update Details?");
+				System.out.println("1.YES\n2.NO");
+				ch2=in.nextInt();
+				if(ch2==1)
+				{
+				   err=in.nextLine();
+				   System.out.print("\nEnter DATE : ");
+				   M_date=in.nextLine();
+			       System.out.print("\nEnter Amount = ");
+			       amount=in.nextInt();
+				   err=in.nextLine();
+				   System.out.print("\nEnter PURPOSE : ");
+				   M_purpose=in.nextLine();
+				   System.out.println("\n");
+			       obj[value].expenseUpdate(M_date,amount,M_purpose);
+				   System.out.println("\n");
+				}
+				System.out.println("0.EXIT");
+				System.out.println("1.GO BACK");
+				exit1=in.nextInt();
+			    break;
+			    case 2:
+				obj[value].amountPaidDetails();
+				System.out.println("\n");
+				System.out.println("Update Details?");
+				System.out.println("1.YES\n2.NO");
+				ch2=in.nextInt();
+				if(ch2==1)
+				{
+			    System.out.print("Enter your Amount = ");
+			    amount=in.nextInt();
+				System.out.println("\n");
+			    obj[value].amountPaidUpdate(amount);
+				System.out.println("\n");
+				}
+			    System.out.println("0.EXIT");
+				System.out.println("1.GO BACK");
+				exit1=in.nextInt();
+			    break;
+			    case 3:
+			    obj[value].getBalance();
+				System.out.println("\n");
+			    System.out.println("0.EXIT");
+				System.out.println("1.GO BACK");
+				exit1=in.nextInt();
+			    break;
+				case 4:
+				System.out.println("\n1.EDIT PHONE NUMBER");
+				System.out.println("2.EDIT ADDRESS");
+				System.out.println("3.EDIT NAME\n");
+				ch3=in.nextInt();
+				switch(ch3)
+				{
+					case 1:
+					clientData.remove(M_Ph_No);
+					i=0;
+				    while(i!=10)
+				    {
+					System.out.print("\nEnter new phone number : ");
+					M_Ph_No=in.nextLong();
+					temp=M_Ph_No;
+				    for(i=1;temp/10!=0;i++)
+					temp/=10;
+				    if(i!=10)
+					System.out.println("\nEnter valid 10 digit phone number\n");
+				    }
+					clientData.put(M_Ph_No,value);
+					obj[value].editPhoneNumber(M_Ph_No);
+					break;
+					case 2:
+					err=in.nextLine();
+					System.out.print("\nEnter new address : ");
+					M_Address=in.nextLine();
+					obj[value].editAddress(M_Address);
+					break;
+					case 3:
+					err=in.nextLine();
+					System.out.print("\nEnter client name : ");
+					M_Name=in.nextLine();
+					obj[value].editName(M_Name);
+					break;
+					default:
+					System.out.print("\nInappropriate Choice");
+				}
+				System.out.println("0.EXIT");
+				System.out.println("1.GO BACK");
+				exit1=in.nextInt();
+				break;
+				case 5:
+				exit1=0;
+				break;
+				default:
+				System.out.println("SELECT APPROPRIATE CHOICE");
+				exit1=1;
+				}
+				}while(exit1==1);
+				break;
+			    case 3:
+				break;
+				default:
+				System.out.println("SELECT APPROPRIATE CHOICE");
+			}
+		}while(ch==1 || ch==2);
+		System.out.println("BYE");
+	}
+}
