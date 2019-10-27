@@ -92,7 +92,7 @@ class cric
         return 0;
     }
 
-    void delay(int time)
+    public static void delay(int time)
     {
         try
         {
@@ -106,39 +106,49 @@ class cric
     public static void main(String[] args) throws IOException
     {
         Scanner in=new Scanner(System.in);
-        int runs;
-        cric obj=new cric();
-        cric obj1=new cric();
-        while((obj.overs<12) && (obj.wickets>0))
-        {
-            obj.create();
-            runs=obj.difficult(0);
-            in.nextLine();
-            if(runs!=-1)
-            obj.runs+=runs;
-            else
-            obj.wickets--;
-            obj.delay(1000);
-        }
-        obj.display(0);
-        while((obj1.overs<12) && (obj1.wickets>0))
-        {
-            obj1.create();
-            runs=obj1.difficult(obj.runs);
-            in.nextLine();
-            if(runs!=-1)
-            obj1.runs+=runs;
-            else
-            obj1.wickets--;
-            obj1.delay(1000);
-        }
-        obj1.display(1);
-        obj1.delay(1000);
+        int runs,overs,temp;
+        cric p1=new cric();
+        cric p2=new cric();
         clearScreen();
-        System.out.println("Player 1 scored "+obj.runs+"\nPlayer 2 scored "+obj1.runs+"\n");
-        if(obj.runs>obj1.runs)
+        System.out.println("How many overs do you want to play??\n");
+        overs=in.nextInt();
+        in.nextLine();
+        System.out.println("Get Ready!!");
+        delay(1000);
+        temp=overs*6;
+        while((temp>0) && (p1.wickets>0))
+        {
+            p1.create();
+            runs=p1.difficult(0);
+            in.nextLine();
+            if(runs!=-1)
+            p1.runs+=runs;
+            else
+            p1.wickets--;
+            delay(1000);
+            temp--;
+        }
+        temp=overs*6;
+        p1.display(0);
+        while((temp>0) && (p2.wickets>0))
+        {
+            p2.create();
+            runs=p2.difficult(p1.runs);
+            in.nextLine();
+            if(runs!=-1)
+            p2.runs+=runs;
+            else
+            p2.wickets--;
+            delay(1000);
+            temp--;
+        }
+        p2.display(1);
+        delay(1000);
+        clearScreen();
+        System.out.println("Player 1 scored "+p1.runs+"\nPlayer 2 scored "+p2.runs+"\n");
+        if(p1.runs>p2.runs)
         System.out.println("\nPlayer 1 wins\n");
-        else if(obj.runs<obj1.runs)
+        else if(p1.runs<p2.runs)
         System.out.println("\nPlayer 2 wins\n");
         else
         System.out.println("\nTie Match!!\n");
