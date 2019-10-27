@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 class cric
 {
     static int a[]={1,1,1,-1,-1,-1,-1,-1,-1,2,2,2,3,3,4,4,4,6,6,6};
@@ -21,16 +22,16 @@ class cric
         System.out.flush();
     }
 
-    int generate()
+    int generate(int min,int max)
     {
-        return r.nextInt(20);
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
     void create()
     {
         int j;
         for(j=0;j<8;j++)
-        index[j]=generate();
+        index[j]=generate(0,19);
     }
 
     void display(int cond)
@@ -68,7 +69,7 @@ class cric
             while(temp--!=0)
             System.out.print("\t");
             System.out.print("|");
-            delay(150);
+            delay(generate(70, 150));
             if(flag)
             {
                 i++;
